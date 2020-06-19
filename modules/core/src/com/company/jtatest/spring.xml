@@ -40,7 +40,7 @@
         <property name="transactionTimeout" value="300"/>
     </bean>
 
-    <bean id="jtaTransactionManager"
+    <bean id="transactionManager"
           class="org.springframework.transaction.jta.JtaTransactionManager">
         <property name="transactionManager" ref="atomikosTransactionManager"/>
         <property name="userTransaction" ref="atomikosUserTransaction"/>
@@ -68,10 +68,10 @@
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
     </bean>
 
-    <bean id="transactionManager_Archive" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory_Archive"/>
-        <property name="dataSource" ref="cubaDataSource_Archive"/>
-        <qualifier type="org.springframework.beans.factory.annotation.Qualifier" value="Archive"/>
+    <bean id="transactionManager_Archive"
+          class="org.springframework.transaction.jta.JtaTransactionManager">
+        <property name="transactionManager" ref="atomikosTransactionManager"/>
+        <property name="userTransaction" ref="atomikosUserTransaction"/>
     </bean>
 
 </beans>

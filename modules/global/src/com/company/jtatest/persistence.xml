@@ -2,5 +2,8 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="jtatest" transaction-type="JTA">
         <class>com.company.jtatest.entity.Book</class>
+        <properties>
+            <property name="eclipselink.target-server" value="com.company.jtatest.core.sys.AtomikosServerPlatform"/>
+        </properties>
     </persistence-unit>
 </persistence>

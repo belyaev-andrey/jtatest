@@ -3,5 +3,8 @@
              version="2.0">
     <persistence-unit name="Archive" transaction-type="JTA">
         <class>com.company.jtatest.entity.ArchivedBook</class>
+        <properties>
+            <property name="eclipselink.target-server" value="com.company.jtatest.core.sys.AtomikosServerPlatform"/>
+        </properties>
     </persistence-unit>
 </persistence>

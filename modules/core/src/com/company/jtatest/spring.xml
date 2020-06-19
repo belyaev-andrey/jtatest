@@ -12,23 +12,66 @@
     <!-- Annotation-based beans -->
     <context:component-scan base-package="com.company.jtatest"/>
 
-    <bean id="AtomikosTransactionManager"
+    <!--    Enabling JTA Transactions-->
+
+    <bean id="userTransactionService"
+          class="com.atomikos.icatch.config.UserTransactionServiceImp"
+          init-method="init" destroy-method="shutdownForce">
+        <constructor-arg>
+            <props>
+                <prop key="com.atomikos.icatch.service">
+                    com.atomikos.icatch.standalone.UserTransactionServiceFactory
+                </prop>
+            </props>
+        </constructor-arg>
+    </bean>
+
+    <bean id="atomikosTransactionManager"
           class="com.atomikos.icatch.jta.UserTransactionManager"
-          init-method="init" destroy-method="close">
-        <property name="forceShutdown" value="false" />
+          init-method="init" destroy-method="close"
+          depends-on="userTransactionService">
+        <property name="startupTransactionService" value="false"/>
+        <property name="forceShutdown" value="false"/>
     </bean>
 
-    <bean id="AtomikosUserTransaction"
-          class="com.atomikos.icatch.jta.UserTransactionImp">
-        <property name="transactionTimeout" value="300" />
+    <bean id="atomikosUserTransaction"
+          class="com.atomikos.icatch.jta.UserTransactionImp"
+          depends-on="userTransactionService">
+        <property name="transactionTimeout" value="300"/>
     </bean>
 
-    <bean id="JtaTransactionManager"
+    <bean id="jtaTransactionManager"
           class="org.springframework.transaction.jta.JtaTransactionManager">
-        <property name="transactionManager" ref="AtomikosTransactionManager" />
-        <property name="userTransaction" ref="AtomikosUserTransaction" />
+        <property name="transactionManager" ref="atomikosTransactionManager"/>
+        <property name="userTransaction" ref="atomikosUserTransaction"/>
     </bean>
 
-    
+    <bean id="cuba_DataSourceProvider" class="com.company.jtatest.core.sys.XaDataSourceProvider"/>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          lazy-init="false">
+        <property name="persistenceXmlLocation" value="file:${cuba.dataDir}/persistence.xml"/>
+        <property name="jtaDataSource" ref="cubaDataSource"/>
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+    </bean>
+
+    <!--    Archive Datasourse Related Configuration-->
+
+    <bean id="cubaDataSource_Archive" class="com.haulmont.cuba.core.sys.CubaDataSourceFactoryBean">
+        <property name="storeName" value="Archive"/>
+    </bean>
+
+    <bean id="entityManagerFactory_Archive" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          lazy-init="false">
+        <property name="persistenceXmlLocation" value="file:${cuba.dataDir}/Archive-persistence.xml"/>
+        <property name="jtaDataSource" ref="cubaDataSource_Archive"/>
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+    </bean>
+
+    <bean id="transactionManager_Archive" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory_Archive"/>
+        <property name="dataSource" ref="cubaDataSource_Archive"/>
+        <qualifier type="org.springframework.beans.factory.annotation.Qualifier" value="Archive"/>
+    </bean>
 
 </beans>

@@ -16,6 +16,7 @@
         <form id="form" dataContainer="bookDc">
             <column width="350px">
                 <textField id="nameField" property="name"/>
+                <checkBox id="archivedCb" property="archived" enable="false"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

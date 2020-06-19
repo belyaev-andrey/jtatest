@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://bookBrowse.caption"
-        focusComponent="booksTable"
-        messagesPack="com.company.jtatest.web.screens.book">
+        caption="msg://archivedBookBrowse.caption"
+        focusComponent="archivedBooksTable"
+        messagesPack="com.company.jtatest.web.screens.archivedbook">
     <data readOnly="true">
-        <collection id="booksDc"
-                    class="com.company.jtatest.entity.Book">
-            <view extends="_local"/>
-            <loader id="booksDl">
+        <collection id="archivedBooksDc"
+                    class="com.company.jtatest.entity.ArchivedBook">
+            <view extends="_local">
+                <property name="book" view="_minimal"/>
+            </view>
+            <loader id="archivedBooksDl">
                 <query>
-                    <![CDATA[select e from jtatest_Book e]]>
+                    <![CDATA[select e from jtatest_ArchivedBook e]]>
                 </query>
             </loader>
         </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="booksTable"
+    <layout expand="archivedBooksTable"
             spacing="true">
         <filter id="filter"
-                applyTo="booksTable"
-                dataLoader="booksDl">
+                applyTo="archivedBooksTable"
+                dataLoader="archivedBooksDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="booksTable"
+        <groupTable id="archivedBooksTable"
                     width="100%"
-                    dataContainer="booksDc">
+                    dataContainer="archivedBooksDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="name"/>
-                <column id="archived"/>
+                <column id="book"/>
+                <column id="archiveDate"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="booksTable.create"/>
-                <button id="editBtn" action="booksTable.edit"/>
-                <button id="removeBtn" action="booksTable.remove"/>
-                <button id="archiveDtn" caption="msg://archive"/>
+                <button id="createBtn" action="archivedBooksTable.create"/>
+                <button id="editBtn" action="archivedBooksTable.edit"/>
+                <button id="removeBtn" action="archivedBooksTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

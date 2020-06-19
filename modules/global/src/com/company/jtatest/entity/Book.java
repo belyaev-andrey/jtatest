@@ -18,6 +18,17 @@ public class Book extends StandardEntity {
     @Column(name = "NAME", nullable = false)
     private String name;
 
+    @Column(name = "ARCHIVED")
+    private Boolean archived;
+
+    public Boolean getArchived() {
+        return archived;
+    }
+
+    public void setArchived(Boolean archived) {
+        this.archived = archived;
+    }
+
     public String getName() {
         return name;
     }

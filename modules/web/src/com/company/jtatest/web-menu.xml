@@ -2,5 +2,6 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-jtatest" insertBefore="administration">
         <item screen="jtatest_Book.browse" caption="mainMsg://menu_config.jtatest_Book.browse"/>
+        <item screen="jtatest_ArchivedBook.browse" caption="mainMsg://menu_config.jtatest_ArchivedBook.browse"/>
     </menu>
 </menu-config>

@@ -10,6 +10,7 @@ create table JTATEST_BOOK (
     DELETED_BY varchar(50),
     --
     NAME varchar(255) not null,
+    ARCHIVED boolean,
     --
     primary key (ID)
 )^

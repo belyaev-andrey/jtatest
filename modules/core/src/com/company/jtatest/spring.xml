@@ -22,6 +22,9 @@
                 <prop key="com.atomikos.icatch.service">
                     com.atomikos.icatch.standalone.UserTransactionServiceFactory
                 </prop>
+                <prop key="com.atomikos.icatch.serial_jta_transactions">
+                    false
+                </prop>
             </props>
         </constructor-arg>
     </bean>

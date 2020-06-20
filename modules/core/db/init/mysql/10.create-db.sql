@@ -1,12 +1,12 @@
 -- begin JTATEST_BOOK
 create table JTATEST_BOOK (
-    ID uuid,
+    ID varchar(32),
     VERSION integer not null,
-    CREATE_TS timestamp,
+    CREATE_TS datetime(3),
     CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
+    UPDATE_TS datetime(3),
     UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
+    DELETE_TS datetime(3),
     DELETED_BY varchar(50),
     --
     NAME varchar(255) not null,

@@ -36,7 +36,7 @@ dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
 }
 
-def postgres = 'org.postgresql:postgresql:42.2.9'
+def mysql = 'mysql:mysql-connector-java:8.0.15'
 
 configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'java')
@@ -92,8 +92,8 @@ configure(coreModule) {
     dependencies {
         compile(globalModule)
         compileOnly(servletApi)
-        jdbc(postgres)
-        testRuntime(postgres)
+        jdbc(mysql)
+        testRuntime(mysql)
     }
 
     task cleanConf(description: 'Cleans up conf directory', type: Delete) {
@@ -110,6 +110,14 @@ configure(coreModule) {
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
     }
+    task createDb_archive(dependsOn: assembleDbScripts, description: 'Creates additional database - Archive', type: CubaDbCreation) {
+        storeName = 'Archive'
+    }
+    task updateDb_archive(dependsOn: assembleDbScripts, description: 'Updates additional database - Archive', type: CubaDbUpdate) {
+        storeName = 'Archive'
+    }
+    task createAllDb(dependsOn: [createDb, createDb_archive])
+    task updateAllDb(dependsOn: [updateDb, updateDb_archive])
 }
 
 configure(webModule) {

@@ -41,9 +41,9 @@
 
     <!-- Begin CUBA -->
 
-    <logger name="com.haulmont.cuba" level="DEBUG"/>
+    <logger name="com.haulmont.cuba" level="INFO"/>
 
-    <logger name="com.haulmont.cuba.core.sys" level="DEBUG"/>
+    <logger name="com.haulmont.cuba.core.sys" level="INFO"/>
 
     <logger name="com.haulmont.cuba.core.sys.CubaDefaultListableBeanFactory" level="WARN"/>
     
@@ -63,9 +63,9 @@
 
     <logger name="eclipselink" level="WARN"/>
 
-    <logger name="eclipselink.sql" level="DEBUG"/>
+    <logger name="eclipselink.sql" level="WARN"/>
 
-    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="org.springframework" level="WARN"/>
 
     <logger name="com.vaadin" level="WARN"/>
 

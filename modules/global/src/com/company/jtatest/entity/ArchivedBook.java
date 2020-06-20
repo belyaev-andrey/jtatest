@@ -1,9 +1,9 @@
 package com.company.jtatest.entity;
 
 import com.haulmont.chile.core.annotations.MetaProperty;
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.SystemLevel;
-import com.haulmont.cuba.core.global.DdlGeneration;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +13,9 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@DdlGeneration(value = DdlGeneration.DbScriptGenerationMode.DISABLED)
 @Table(name = "JTATEST_ARCHIVED_BOOK")
 @Entity(name = "jtatest_ArchivedBook")
+@NamePattern("%s %s|bookId,archiveDate")
 public class ArchivedBook extends StandardEntity {
     private static final long serialVersionUID = -5756228009473699826L;
 

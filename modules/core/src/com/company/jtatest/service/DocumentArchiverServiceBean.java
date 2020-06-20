@@ -4,6 +4,7 @@ import com.company.jtatest.entity.ArchivedBook;
 import com.company.jtatest.entity.Book;
 import com.haulmont.cuba.core.global.DataManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class DocumentArchiverServiceBean implements DocumentArchiverService {
     @Inject
     private DataManager dataManager;
 
+    @Transactional
     @Override
     public Book archiveBook(Book book) {
         if (book == null) {

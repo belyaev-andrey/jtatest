@@ -45,7 +45,9 @@ public class XaDataSourceProvider extends DataSourceProvider {
         return getMySqlXaDataSource(dsParameters);
     }
 
-/*
+     //TODO PotgreSQL does not work with CUBA Anonymous login,
+    // TODO see https://www.atomikos.com/Documentation/KnownProblems#PostgreSQL_HeuristicMixed_Exception
+    /*
     private XADataSource getPgSqlXaDataSource(Map<String, String> dsParameters) {
         PGXADataSource ds = new PGXADataSource();
         ds.setServerNames(new String[]{dsParameters.get(HOST)});
@@ -59,7 +61,6 @@ public class XaDataSourceProvider extends DataSourceProvider {
 
     private XADataSource getMySqlXaDataSource(Map<String, String> dsParameters) {
         MysqlXADataSource ds = new MysqlXADataSource();
-        //PGXADataSource ds = new PGXADataSource();
         ds.setServerName(dsParameters.get(HOST));
         ds.setPort(Integer.parseInt(dsParameters.getOrDefault(PORT, "5432")));
         ds.setDatabaseName(dsParameters.get(DB_NAME));
@@ -72,7 +73,7 @@ public class XaDataSourceProvider extends DataSourceProvider {
             ds.setUseSSL(false);
             ds.setAllowMultiQueries(true);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(); //TODO OK for PoC
         }
         return ds;
     }

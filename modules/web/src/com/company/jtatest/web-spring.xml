@@ -13,6 +13,8 @@
             <map>
                 <entry key="jtatest_DocumentArchiverService"
                        value="com.company.jtatest.service.DocumentArchiverService"/>
+                <entry key="jtatest_ArchiveService" value="com.company.jtatest.service.ArchiveService"/>
+                <entry key="jtatest_BookService" value="com.company.jtatest.service.BookService"/>
             </map>
         </property>
     </bean>

@@ -8,9 +8,7 @@ import javax.transaction.TransactionManager;
 public class AtomikosJtaTransactionController extends JTATransactionController {
 
     protected TransactionManager acquireTransactionManager() throws Exception {
-        TransactionManager transactionManager = AppBeans.get("atomikosTransactionManager");
-        return transactionManager;
+        return AppBeans.get("atomikosTransactionManager");
     }
-
 
 }

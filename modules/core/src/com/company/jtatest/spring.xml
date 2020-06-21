@@ -49,7 +49,10 @@
         <property name="userTransaction" ref="atomikosUserTransaction"/>
     </bean>
 
+    <!--    Need to override datasource provider to generate XA Datasource-->
     <bean id="cuba_DataSourceProvider" class="com.company.jtatest.core.sys.XaDataSourceProvider"/>
+
+    <!--    Main Datasource Related Configuration -->
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           lazy-init="false">
@@ -71,10 +74,8 @@
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
     </bean>
 
-    <bean id="transactionManager_Archive"
-          class="org.springframework.transaction.jta.JtaTransactionManager">
-        <property name="transactionManager" ref="atomikosTransactionManager"/>
-        <property name="userTransaction" ref="atomikosUserTransaction"/>
-    </bean>
+    <alias name="transactionManager" alias="Archive"/>
+
+    <alias name="transactionManager" alias="transactionManager_Archive"/>
 
 </beans>

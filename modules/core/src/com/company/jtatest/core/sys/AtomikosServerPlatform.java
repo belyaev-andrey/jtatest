@@ -14,13 +14,4 @@ public class AtomikosServerPlatform extends ServerPlatformBase {
         return AtomikosJtaTransactionController.class;
     }
 
-    @Override
-    protected void externalTransactionControllerNotNullWarning() {
-        super.externalTransactionControllerNotNullWarning();
-    }
-
-    @Override
-    public boolean isJTAEnabled() {
-        return super.isJTAEnabled();
-    }
 }
